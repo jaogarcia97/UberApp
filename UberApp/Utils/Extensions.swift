@@ -56,36 +56,65 @@ extension UIView {
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    func centerY(inView view: UIView){
-        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    func centerY(inView view: UIView, constant: CGFloat = 0){
+        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
     }
     
     
-    func inputContainerView(image:UIImage, textField: UITextField) -> UIView {
+    func inputContainerView(image:UIImage,
+                            textField: UITextField? = nil,
+                            segmentedControl: UISegmentedControl? = nil) -> UIView {
         let view = UIView()
         
-        //Initialize Mail Image
+        //Initialize image container properties
         let imageView = UIImageView()
         imageView.image = image
         imageView.alpha = 0.87
         view.addSubview(imageView)
-        //Set Location of Mail Image in view
-        imageView.centerY(inView: view)
-        imageView.anchor(left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
         
         
-        //Add email textfield inside, must: set let to var (since you are going to use another variable for the value of this variable)
-        view.addSubview(textField)
-        textField.centerY(inView: view)
-        textField.anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
+        //If textfield exists in the container
+        if let textField = textField {
+            //Set position of image container
+            imageView.centerY(inView: view)
+            imageView.anchor(left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
+            
+            
+            view.addSubview(textField)
+            textField.centerY(inView: view)
+            textField.anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
+        }
         
-
+        // Rider / Driver
+        if let sc = segmentedControl {
+            imageView.anchor(top: view.topAnchor, left: view.leftAnchor,
+                             paddingTop: -18, paddingLeft: 8, width: 24, height: 24)
+            view.addSubview(sc)
+            sc.anchor(left: view.leftAnchor, right: view.rightAnchor,
+                       paddingLeft: 8, paddingRight: 8)
+            sc.centerY(inView: view, constant: 0)
+        }
+        
+//        if let sc = segmentedControl {
+//            imageView.anchor(top: view.topAnchor, left: view.leftAnchor,
+//                             paddingTop: -8, paddingLeft: 8, width: 24, height: 24)
+//
+//            view.addSubview(sc)
+//            sc.anchor(left: view.leftAnchor, right: view.rightAnchor,
+//                     paddingLeft: 8, paddingRight: 8)
+//            sc.centerY(inView: view)
+//        }
+        
+        
+        
+        
         //Seperator View (Underline the textfield)
         let seperatorView = UIView()
         seperatorView.backgroundColor = .lightGray
         view.addSubview(seperatorView)
         seperatorView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                              right: view.rightAnchor, paddingLeft: 8, height: 0.75)
+        
         
         return view
         

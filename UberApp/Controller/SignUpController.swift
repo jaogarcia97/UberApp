@@ -1,5 +1,5 @@
 //
-//  LoginController.swift
+//  SignUpController.swift
 //  UberApp
 //
 //  Created by Jao Garcia on 3/27/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginController:UIViewController {
+class SignUpController: UIViewController {
     
     //MARK: - Set Properties
     
@@ -43,75 +43,95 @@ class LoginController:UIViewController {
         return UITextField().textField(withPlaceHolder: "Password", isSecureTextEntry: true)
     }()
     
-    //Login Button
-    private let loginUIButton: AuthButton = {
-        let button = AuthButton(type: .system)
-        button.setTitle("Login", for: .normal)
-        return button
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+    //Full Name Container
+    private lazy var fullnameContainerView: UIView = {
+        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: fullnameTextField)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return view
     }()
-
+    private let fullnameTextField:UITextField = {
+        //Seperate it from the container, because eventually we would have to manipulate the textField alone
+        return UITextField().textField(withPlaceHolder: "Full Name", isSecureTextEntry: false)
+    }()
     
-    let dontHaveAccountButton: UIButton = {
+    //Account Type container
+    private lazy var accountTypeContainerView: UIView = {
+        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_account_box_white_2x"),segmentedControl:accountTypeSegmentedControl)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return view
+    }()
+    
+    private let accountTypeSegmentedControl: UISegmentedControl = {
+       let sc = UISegmentedControl(items: ["Rider","Driver"])
+        sc.backgroundColor = .backgroundColor
+        sc.tintColor = UIColor(white: 1, alpha: 0.87) //Alpha is recommended to be 0.87 by the google documentation
+        sc.selectedSegmentIndex = 0 //Index where the the selection defaults to
+        return sc
+    }()
+    
+    //SignUp Button
+    private let signUpButton: AuthButton = {
+        let button = AuthButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        return button
+    }()
+    
+    //Already Have an Account Button
+    let alreadyHaveAnAccountButton: UIButton = {
         let button = UIButton(type: .system)
         //Make Mutable Attributed String
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ",
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ",
                                                         attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16),
                                                                      NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.mainBlueTint]))
+        attributedTitle.append(NSAttributedString(string: "Log in", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.mainBlueTint]))
         
     
         //For story boards, this is like conencting an action/IBaction
-        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         return button
     }()
     
+    @objc func handleShowLogin(){
+        navigationController?.popViewController(animated: true)
+    }
     
-    //MARK: - LifeCycle
-    override func viewDidLoad(){
+    
+    //MARK: - Life cycle  
+    override func viewDidLoad() {
         super.viewDidLoad()
+        //view.backgroundColor = .red
         configureUI()
     }
-
+    
     //MARK: - Selectors
-    @objc func handleShowSignUp(){
-        print("Attempt to push controller")
-        
-        //In order to perform segue, the root view controller must be UINavigationController(rootViewController: LoginController())
-        let controller = SignUpController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
     
     //MARK: - Helper Functions
     func configureUI(){
-        configureNavigationBar()
         view.backgroundColor = .backgroundColor //Custom App BG Color
         //Initialize Title label
         view.addSubview(titleLabel)
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor)
         titleLabel.centerX(inView: view)
         
-        let stack = UIStackView(arrangedSubviews: [emailContainerView,passwordContainerView,loginUIButton])
+        let stack = UIStackView(arrangedSubviews: [emailContainerView,
+                                                   passwordContainerView,
+                                                   fullnameContainerView,
+                                                   accountTypeContainerView,
+                                                   signUpButton])
         stack.axis = .vertical
         stack.distribution = .fillEqually
-        stack.spacing = 16
-        
+        stack.spacing = 24
         
         view.addSubview(stack)
         stack.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
                      paddingTop: 40, paddingLeft: 16,paddingRight: 16)
         
-        view.addSubview(dontHaveAccountButton)
-        dontHaveAccountButton.anchor(bottom:view.safeAreaLayoutGuide.bottomAnchor, height:32)
-        dontHaveAccountButton.centerX(inView: view)
+        view.addSubview(alreadyHaveAnAccountButton)
+        alreadyHaveAnAccountButton.anchor(bottom:view.safeAreaLayoutGuide.bottomAnchor, height:32)
+        alreadyHaveAnAccountButton.centerX(inView: view)
+        
     }
-    
-    func configureNavigationBar(){
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.navigationBar.barStyle = .black
-    }
-    
-    
 }

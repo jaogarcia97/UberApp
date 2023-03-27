@@ -14,6 +14,9 @@
 		B226BF9129D126EA0005CA66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B226BF8F29D126EA0005CA66 /* LaunchScreen.storyboard */; };
 		B226BFA229D128FE0005CA66 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B226BFA129D128FE0005CA66 /* LoginController.swift */; };
 		B226BFA429D132B00005CA66 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B226BFA329D132B00005CA66 /* Extensions.swift */; };
+		B226BFA629D1813D0005CA66 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B226BFA529D1813D0005CA66 /* SignUpController.swift */; };
+		B226BFA829D1BBBD0005CA66 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B226BFA729D1BBBD0005CA66 /* AuthButton.swift */; };
+		B226BFAA29D1F80D0005CA66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B226BFA929D1F80D0005CA66 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		B226BF9229D126EA0005CA66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B226BFA129D128FE0005CA66 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		B226BFA329D132B00005CA66 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B226BFA529D1813D0005CA66 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		B226BFA729D1BBBD0005CA66 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		B226BFA929D1F80D0005CA66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 				B226BF8429D126E80005CA66 /* AppDelegate.swift */,
 				B226BF8629D126E80005CA66 /* SceneDelegate.swift */,
 				B226BF8A29D126E80005CA66 /* Main.storyboard */,
+				B226BFA929D1F80D0005CA66 /* GoogleService-Info.plist */,
 				B226BF8D29D126EA0005CA66 /* Assets.xcassets */,
 				B226BF8F29D126EA0005CA66 /* LaunchScreen.storyboard */,
 				B226BF9229D126EA0005CA66 /* Info.plist */,
@@ -83,6 +90,7 @@
 		B226BF9D29D1282B0005CA66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B226BFA729D1BBBD0005CA66 /* AuthButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -91,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				B226BFA129D128FE0005CA66 /* LoginController.swift */,
+				B226BFA529D1813D0005CA66 /* SignUpController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B226BF9129D126EA0005CA66 /* LaunchScreen.storyboard in Resources */,
+				B226BFAA29D1F80D0005CA66 /* GoogleService-Info.plist in Resources */,
 				B226BF8E29D126EA0005CA66 /* Assets.xcassets in Resources */,
 				B226BF8C29D126E80005CA66 /* Main.storyboard in Resources */,
 			);
@@ -180,6 +190,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B226BFA629D1813D0005CA66 /* SignUpController.swift in Sources */,
+				B226BFA829D1BBBD0005CA66 /* AuthButton.swift in Sources */,
 				B226BFA229D128FE0005CA66 /* LoginController.swift in Sources */,
 				B226BF8529D126E80005CA66 /* AppDelegate.swift in Sources */,
 				B226BF8729D126E80005CA66 /* SceneDelegate.swift in Sources */,

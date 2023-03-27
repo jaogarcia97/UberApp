@@ -21,7 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = scene as? UIWindowScene else { return }
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = LoginController()
+        
+        //20230227.Jao. 3:51PM : embed in Navigation Controller
+        if true {
+            window?.rootViewController = UINavigationController(rootViewController: LoginController())
+        }
+        else {
+            //window?.rootViewController = LoginController()
+        }
+        
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
