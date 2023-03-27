@@ -22,49 +22,37 @@ class LoginController:UIViewController {
     
     //EMAIL Container:
     private lazy var emailContainerView: UIView = {
-        //Set Dimensions of the Container View
-        let view = UIView() //Container View
-        //view.backgroundColor = .red
+        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextfield)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return view
         
-        //Initialize Mail Image
-        let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "ic_mail_outline_white_2x")
-        imageView.alpha = 0.87
-        view.addSubview(imageView)
-        //Set Location of Mail Image in view
-        imageView.centerY(inView: view)
-        imageView.anchor(left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
-        
-        //Add email textfield inside, must: set let to var (since you are going to use another variable for the value of this variable)
-        view.addSubview(emailTextfield)
-        emailTextfield.centerY(inView: view)
-        emailTextfield.anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
-        
-        //Seperator View (Underline the textfield) 
-        let seperatorView = UIView()
-        seperatorView.backgroundColor = .lightGray
-        view.addSubview(seperatorView)
-        seperatorView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
-                             right: view.rightAnchor, paddingLeft: 8, height: 0.75)
-        
-    
+    }()
+
+    //EMAIL TEXTFIELD: - Seperate it from the container, because eventually we would have to manipulate the textField alone
+    private let emailTextfield: UITextField = {
+        return UITextField().textField(withPlaceHolder: "Email", isSecureTextEntry: false)
+    }()
+
+    //PASSWORD Container
+    private lazy var passwordContainerView: UIView = {
+        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
     
-    //EMAIL TEXTFIELD: - Seperate it from the container, because eventually we would have to manipulate the textField alone
-    private let emailTextfield: UITextField = {
-        let tf = UITextField()
-        //Remove Border
-        tf.borderStyle = .none
-        tf.font = UIFont.systemFont(ofSize: 16)
-        tf.keyboardAppearance = .dark //Dark Keyboard
-        //Use Attributes to specify properties, in this case we added .foregroundColor to manipulate the color
-        tf.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        
-        return tf
+    private let passwordTextField:UITextField = {
+        return UITextField().textField(withPlaceHolder: "Password", isSecureTextEntry: true)
     }()
     
     
+    private let loginUIButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Login", for: .normal)
+        button.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+        button.backgroundColor = .blue
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return button
+    }()
     
     
     
@@ -81,21 +69,24 @@ class LoginController:UIViewController {
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor)
         titleLabel.centerX(inView: view)
         
-//20230327.Jao.Remove.Start: - Moved UI functions to Extensions.Swift
-        //Something you have to do to activate automatic layout
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        //Center in the x axis
-//        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        //Anchor it to the top of our view, constant is how far it is from the reference
-//        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-//20230327.Jao.Remove.End: - Moved UI functions to Extensions.Swift
+        let stack = UIStackView(arrangedSubviews: [emailContainerView,passwordContainerView,loginUIButton])
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.spacing = 16
         
+        
+        view.addSubview(stack)
+        stack.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                     paddingTop: 40, paddingLeft: 16,paddingRight: 16)
         
         //Initialize Email SubView
-        view.addSubview(emailContainerView)
-        emailContainerView.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16,height: 50)
+//        view.addSubview(emailContainerView)
+//        emailContainerView.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16,height: 50)
+//        //Initialize Password Subview
+//        view.addSubview(passwordContainerView)
+//        passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 16, paddingLeft: 16, paddingRight: 16,height: 50)
         
-        
+    
     }
     
     //Change color of iPhone time and signal to white
