@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpController: UIViewController {
     
@@ -74,6 +75,7 @@ class SignUpController: UIViewController {
         let button = AuthButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -107,6 +109,33 @@ class SignUpController: UIViewController {
     }
     
     //MARK: - Selectors
+    @objc func handleSignUp(){
+        guard let email = emailTextfield.text else {return}
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else {return}
+        let accountTypeIndex = accountTypeSegmentedControl.selectedSegmentIndex
+        
+        print(email)
+        print(password)
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            //If error exists
+            if let error = error {
+                print("Error occurred: \(error.localizedDescription)")
+                return
+            }
+            //Get user id
+            guard let uid = result?.user.uid else {return}
+            let values = ["email": email,
+                          "fullname":fullname,
+                          "accountType": accountTypeIndex] as [String : Any]
+            
+            //Upload the date values in firebase
+            Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in print("Successfully registered user")})
+        }
+
+    }
+    
     
     //MARK: - Helper Functions
     func configureUI(){

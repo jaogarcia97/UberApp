@@ -131,6 +131,7 @@ extension UITextField {
         //Remove Border
         tf.borderStyle = .none
         tf.font = UIFont.systemFont(ofSize: 16)
+        tf.textColor = UIColor.lightGray
         tf.keyboardAppearance = .dark //Dark Keyboard
         tf.isSecureTextEntry = isSecureTextEntry
         //Use Attributes to specify properties, in this case we added .foregroundColor to manipulate the color
