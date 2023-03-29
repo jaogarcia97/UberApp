@@ -24,9 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //20230227.Jao. 3:51PM : embed in Navigation Controller
         if true {
-            window?.rootViewController = UINavigationController(rootViewController: LoginController())
+            window?.rootViewController = HomeController()
+        } else if false { // #Login is navigated from login to signup
+            //window?.rootViewController = UINavigationController(rootViewController: LoginController())
         }
-        else {
+        else { // #Initial
             //window?.rootViewController = LoginController()
         }
         

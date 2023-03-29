@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController:UIViewController {
     
@@ -47,11 +48,12 @@ class LoginController:UIViewController {
     private let loginUIButton: AuthButton = {
         let button = AuthButton(type: .system)
         button.setTitle("Login", for: .normal)
-        return button
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleLogin), for:.touchUpInside)
+        return button
     }()
-
     
+
     let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         //Make Mutable Attributed String
@@ -84,6 +86,21 @@ class LoginController:UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func handleLogin() {
+        guard let email = emailTextfield.text else {return}
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("Failed to log user in with error \(error.localizedDescription)")
+                return
+            }
+            //Dismiss controller if successful login
+            print("Successfully logged user in")
+            self.dismiss(animated: true, completion: nil) //This Takes you back the the root screen 
+        }
+    }
+    
+
     //MARK: - Helper Functions
     func configureUI(){
         configureNavigationBar()
