@@ -7,19 +7,20 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class HomeController: UIViewController {
     
     //MARK: - Properties
-    
+    private let mapView = MKMapView()
     
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
-        //signOut()
-        view.backgroundColor = .red
+        signOut()
+        //view.backgroundColor = .red
     }
     
     //MARK: - API
@@ -36,6 +37,7 @@ class HomeController: UIViewController {
         } else {
             print("DEBUG: User is logged in.. ")
             print("DEBUG: User id is \(Auth.auth().currentUser?.uid) ")
+            configureUI()
         }
     }
     
@@ -45,6 +47,13 @@ class HomeController: UIViewController {
         } catch {
             print("DEBUG: Error Signing Out")
         }   
+    }
+    
+    //MARK: - Helper Functions
+    
+    func configureUI(){
+        view.addSubview(mapView)
+        mapView.frame = view.frame
     }
 
 }

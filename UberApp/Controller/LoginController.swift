@@ -96,7 +96,17 @@ class LoginController:UIViewController {
             }
             //Dismiss controller if successful login
             print("Successfully logged user in")
-            self.dismiss(animated: true, completion: nil) //This Takes you back the the root screen 
+            
+            //Displaying the map in the homecontroller, is only done when a user is successfull in logging in, make sure that if we login, we can get to the homeview (which is the map)
+            
+            //This will make us access the funcitons without using protocols and delegates
+            let keyWindow = UIApplication.shared.windows.first{$0.isKeyWindow}
+            guard let controller = keyWindow?.rootViewController as? HomeController else {return}
+            //This Takes you back the the root screen
+            controller.configureUI()
+            self.dismiss(animated: true, completion: nil)
+            
+        
         }
     }
     

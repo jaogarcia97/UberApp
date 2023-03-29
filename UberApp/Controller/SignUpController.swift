@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 
 class SignUpController: UIViewController {
     
     //MARK: - Set Properties
+    private let mapView = MKMapView()
     
     //UBER TITLE
     private let titleLabel: UILabel = {
@@ -132,6 +134,10 @@ class SignUpController: UIViewController {
             
             //Upload the date values in firebase
             Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in print("Successfully registered user")})
+            
+            //Move to Home (Root View)
+            self.dismiss(animated: true, completion: nil)
+            
         }
 
     }
