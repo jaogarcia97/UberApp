@@ -14,7 +14,7 @@ class HomeController: UIViewController {
     //MARK: - Properties
     private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
-    
+    private let inputActivationView = LocationInputActivationView()
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -54,6 +54,19 @@ class HomeController: UIViewController {
     //MARK: - Helper Functions
     func configureUI(){
         configureMapView()
+        
+        view.addSubview(inputActivationView)
+        inputActivationView.centerX(inView: view)
+        inputActivationView.setDimensions(height: 50, width: view.frame.width - 64)
+        inputActivationView.layer.cornerRadius = 20
+        inputActivationView.anchor(top: view.topAnchor, paddingTop: 50)
+        inputActivationView.alpha = 0 //Initial is zero opacity
+        
+        UIView.animate(withDuration: 2){
+            self.inputActivationView.alpha = 1 //Make the activation view visible
+        }
+        
+
     }
     
     func configureMapView(){
@@ -62,6 +75,7 @@ class HomeController: UIViewController {
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+        
     }
     
 
