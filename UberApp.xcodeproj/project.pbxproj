@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		37BB92ED8FD06A22238C7546 /* Pods_UberApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55ABD83A16E869F812614CD8 /* Pods_UberApp.framework */; };
+		B2104DD029D56872003F1E98 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2104DCF29D56872003F1E98 /* LocationInputActivationView.swift */; };
 		B226BF8529D126E80005CA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B226BF8429D126E80005CA66 /* AppDelegate.swift */; };
 		B226BF8729D126E80005CA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B226BF8629D126E80005CA66 /* SceneDelegate.swift */; };
 		B226BF8C29D126E80005CA66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B226BF8A29D126E80005CA66 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		55ABD83A16E869F812614CD8 /* Pods_UberApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7888661FD2DF417EFD4F22AE /* Pods-UberApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberApp.release.xcconfig"; path = "Target Support Files/Pods-UberApp/Pods-UberApp.release.xcconfig"; sourceTree = "<group>"; };
 		9952E5B2B14403ED5C115D63 /* Pods-UberApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberApp.debug.xcconfig"; path = "Target Support Files/Pods-UberApp/Pods-UberApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B2104DCF29D56872003F1E98 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
 		B226BF8129D126E80005CA66 /* UberApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B226BF8429D126E80005CA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B226BF8629D126E80005CA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				B226BFA729D1BBBD0005CA66 /* AuthButton.swift */,
+				B2104DCF29D56872003F1E98 /* LocationInputActivationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				B226BFA229D128FE0005CA66 /* LoginController.swift in Sources */,
 				B226BF8529D126E80005CA66 /* AppDelegate.swift in Sources */,
 				B226BF8729D126E80005CA66 /* SceneDelegate.swift in Sources */,
+				B2104DD029D56872003F1E98 /* LocationInputActivationView.swift in Sources */,
 				B226BFA429D132B00005CA66 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

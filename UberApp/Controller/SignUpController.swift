@@ -135,7 +135,12 @@ class SignUpController: UIViewController {
             //Upload the date values in firebase
             Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in print("Successfully registered user")})
             
-            //Move to Home (Root View)
+            
+            //This will make us access the funcitons without using protocols and delegates
+            let keyWindow = UIApplication.shared.windows.first{$0.isKeyWindow}
+            guard let controller = keyWindow?.rootViewController as? HomeController else {return}
+            //Dismissing takes you back the the root screen
+            controller.configureUI()
             self.dismiss(animated: true, completion: nil)
             
         }
