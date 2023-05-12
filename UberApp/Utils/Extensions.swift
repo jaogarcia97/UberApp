@@ -72,6 +72,13 @@ extension UIView {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
+    func addShadow(){
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.45
+        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        layer.masksToBounds = false
+    }
+    
     
     
     func inputContainerView(image:UIImage,
@@ -119,16 +126,13 @@ extension UIView {
 //        }
         
         
-        
-        
         //Seperator View (Underline the textfield)
         let seperatorView = UIView()
         seperatorView.backgroundColor = .lightGray
         view.addSubview(seperatorView)
         seperatorView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                              right: view.rightAnchor, paddingLeft: 8, height: 0.75)
-        
-        
+    
         return view
         
     }

@@ -15,6 +15,7 @@ class HomeController: UIViewController {
     private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
     private let inputActivationView = LocationInputActivationView()
+    private let locationInputView = LocationInputView()
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -62,11 +63,12 @@ class HomeController: UIViewController {
         inputActivationView.anchor(top: view.topAnchor, paddingTop: 50)
         inputActivationView.alpha = 0 //Initial is zero opacity
         
+        //For Search Screen results:
+        inputActivationView.delegate = self
+        
         UIView.animate(withDuration: 2){
             self.inputActivationView.alpha = 1 //Make the activation view visible
         }
-        
-
     }
     
     func configureMapView(){
@@ -75,6 +77,17 @@ class HomeController: UIViewController {
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+    }
+    
+    func configureLocationInputView(){
+        view.addSubview(locationInputView)
+        locationInputView.anchor(top: view.topAnchor, left: view.leftAnchor,right: view.rightAnchor,height:200)
+        locationInputView.alpha = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.locationInputView.alpha = 1
+        }) { _ in
+            print("Debug: Present Table View..")
+        }
         
     }
     
@@ -114,6 +127,12 @@ extension HomeController: CLLocationManagerDelegate {
         }
     }
     
-    
-    
+}
+
+extension HomeController:LocationInputActivationViewDelegate {
+    //When you click on the search bar this will happen"
+    func presentLocationInputView() {
+        print("DEBUG: Handle present location input view.. ")
+        configureLocationInputView()
+    }
 }

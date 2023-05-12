@@ -7,9 +7,16 @@
 
 import UIKit
 
+//Class Definition: This View is the search bar for finding locations
+
+protocol LocationInputActivationViewDelegate: class {
+    func presentLocationInputView()
+}
 
 class LocationInputActivationView: UIView {
+    
     //MARK: - Properties
+    weak var delegate: LocationInputActivationViewDelegate?
     
     //The black bullet in the location search bar
     let indicatorView: UIView = {
@@ -34,10 +41,8 @@ class LocationInputActivationView: UIView {
         super.init(frame: frame)
         
         backgroundColor = .white
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.45
-        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        layer.masksToBounds = false
+        
+        addShadow()
         
         addSubview(indicatorView)
         indicatorView.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 16)
@@ -58,7 +63,7 @@ class LocationInputActivationView: UIView {
     
     //MARK: - Selectors
     @objc func handleShowLocationInputView(){
-        print("1234")
+        delegate?.presentLocationInputView()
     }
     
 
